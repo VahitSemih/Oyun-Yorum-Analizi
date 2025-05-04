@@ -51,3 +51,18 @@ pip install -r requirements.txt
 python word2vec_vektorlestirme.py
 ```
 
+# 🧠 Veri Seti Hakkında
+- Bu veri seti, oyunlara yapılan kullanıcı yorumlarının analizini içerir. Kullanım amaçları:
+- Doğal dil işleme projeleri
+- Word2Vec, metin sınıflandırma ve duygu analizi çalışmaları
+
+
+# 📦 Gerekli Kütüphaneler
+- pandas
+- gensim
+- numpy
+Tüm kütüphaneler requirements.txt dosyasında listelenmiştir.
+Kurulum:
+```bash
+pip install -r requirements.txt
+```

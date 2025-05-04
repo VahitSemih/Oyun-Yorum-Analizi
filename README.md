@@ -60,6 +60,16 @@ python word2vec_vektorlestirme.py
 - pandas
 - gensim
 - numpy
+- nltk
+- csv
+- sklearn
+- requests
+- json
+- time
+- re
+- matplotlib
+- collections
+
 Tüm kütüphaneler requirements.txt dosyasında listelenmiştir.
 Kurulum:
 ```bash

@@ -32,8 +32,22 @@ Veri seti, metin sınıflandırma, duygu analizi veya öneri sistemlerinde ön i
 ```bash
 git clone https://github.com/VahitSemih/Oyun-Yorum-Analizi.git
 cd Oyun-Yorum-Analizi
-'''
+```
 
-### 1. Reponun Klonlanması
+### 2. Sanal Ortam Oluştur (Opsiyonel fakat önerilir)
 
 ```bash
+python -m venv venv
+.\venv\Scripts\activate       # Windows
+source venv/bin/activate       # macOS/Linux
+```
+
+### 3. Gerekli Kütüphanelerin Kurulumu
+```bash
+pip install -r requirements.txt
+```
+### 4. Modeli Eğitme Script’ini Çalıştır
+```bash
+python word2vec_vektorlestirme.py
+```
+

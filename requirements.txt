@@ -1,0 +1,12 @@
+pandas
+gensim
+numpy
+nltk
+csv
+sklearn
+requests
+json
+time
+re
+matplotlib
+collections

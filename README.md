@@ -1,77 +1,84 @@
+# Oyun Yorumları Üzerinden Word2Vec Modeli Eğitimi
 
-# 🎮 Oyun Yorum Analizi - Steam CS2 Projesi
-
-Bu proje, Steam'deki CS2 (Counter-Strike 2) yorumlarını analiz ederek en yaygın şikayetleri ve olumlu geri bildirimleri tespit etmeyi amaçlar.
-
----
-
-## 📌 Proje Amacı
-
-- Steam yorumlarını metin madenciliği teknikleriyle analiz etmek
-- En sık karşılaşılan problemleri ve memnuniyet kaynaklarını ortaya koymak
-- Şikayetleri tematik olarak gruplandırmak
+Bu proje, oyunlara yapılan kullanıcı yorumları üzerinden doğal dil işleme teknikleri kullanarak kelime vektörleri (Word2Vec) üretmeyi amaçlamaktadır. Projede hem **lemmatize** hem de **stem** edilmiş metinler kullanılarak CBOW ve Skip-gram mimarileriyle farklı parametre kombinasyonlarında modeller eğitilmiştir.
 
 ---
 
-## 📁 Veri Seti Hakkında
+## 🔧 Model Nasıl Oluşturulur?
 
-- **Kaynak:** Steam (Kullanıcı yorumları)
-- **Dosya:** `cs2_yorumlar_3000.csv`
-- **Sütunlar:**
-  - `steamid`: Kullanıcı kimliği
-  - `yorum`: Yorum içeriği
-  - `begeni`: Beğeni sayısı
-  - `oynanan_saat`: Kullanıcının oyunu oynama süresi
+### 1. Gerekli Dosyalar
+Projede aşağıdaki CSV dosyalarının bulunması gerekir:
+- `yorumlar_stemmed.csv`
+- `yorumlar_lemmatized.csv`
 
-**Kullanım amacı:** Oyun hakkında kullanıcı deneyimini analiz etmek; performans, bağlantı, hata ve hile gibi sorunları sınıflandırmak.
+Her dosya şu sütunları içermelidir:
+- `yorum`: Ham kullanıcı yorumu
+- `stemmed` veya `lemmatized`: Ön işlenmiş yorumlar
+
+### 2. Adım Adım Model Eğitimi
+
+1. **Sanal Ortam Oluşturun ve Aktif Edin:**
+
+   Windows PowerShell'de:
+   ```powershell
+   python -m venv venv
+   .\venv\Scripts\Activate.ps1
+   ```
+
+2. **Gerekli Kütüphaneleri Yükleyin:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Modeli Eğitin:**
+   Aşağıdaki Python dosyasını çalıştırın:
+   ```bash
+   python word2vec_vektorlestirme.py
+   ```
+
+   Bu script, lemmatize ve stemmed veriler için farklı parametrelerde Word2Vec modelleri oluşturur ve `.model` uzantılı olarak kaydeder.
 
 ---
 
-## ⚙️ Kurulum ve Gerekli Kütüphaneler
+## 🎯 Veri Seti Amacı
 
-Proje Python ile yazılmıştır. Aşağıdaki kütüphaneler gereklidir:
+Veri seti, oyunlara yapılan kullanıcı yorumlarından oluşmaktadır. Metin madenciliği çalışmaları, doğal dil işleme (NLP), duygu analizi ve öneri sistemleri geliştirme gibi çeşitli akademik ve ticari amaçlarla kullanılabilir.
 
+---
+
+## 📦 Gerekli Kütüphaneler ve Kurulum
+
+### requirements.txt (örnek içeriği):
+```txt
+pandas
+gensim==4.3.1
+numpy
+```
+
+Yüklemek için:
 ```bash
-pip install pandas matplotlib nltk scikit-learn
-```
-
-Ayrıca NLTK stopwords paketini indirmeniz gerekir:
-
-```python
-import nltk
-nltk.download('stopwords')
+pip install -r requirements.txt
 ```
 
 ---
 
-## 🛠️ Modelin Oluşturulması (Adım Adım)
+## 📁 Çıktılar
 
-1. **Veri setini klasöre yerleştirin:** `cs2_yorumlar_3000.csv`
-2. **Ana Python dosyasını çalıştırın:** `cs2_negatif_ngram_analiz.py`
-3. **Yorumlar temizlenir:** Küfürler ve anlamsız ifadeler filtrelenir.
-4. **Negatif ve pozitif yorumlar ayrılır:** Anahtar kelimelere göre.
-5. **N-gram analizi yapılır:** 2-gram ve 3-gram kelime grupları çıkarılır.
-6. **Anahtar kelime sıklığı analiz edilir.**
-7. **Tematik kümeleme yapılır:** Yorumlar performans, bağlantı vb. temalara göre gruplanır.
-8. **Otomatik rapor ve grafikler oluşturulur.**
-9. **Sunum dosyası (`.pptx`) hazır hale getirilir.**
+Script çalıştırıldığında `word2vec_*.model` formatında 8 farklı model dosyası oluşturulur. Örnek:
+- `word2vec_lemmatized_cbow_win2_dim100.model`
+- `word2vec_stemmed_skipgram_win4_dim300.model`
+
+Bu modeller, `gensim` kullanılarak kolayca yüklenebilir ve kelime benzerlikleri, vektör aritmetiği gibi işlemlerde kullanılabilir.
 
 ---
 
-## 📊 Çıktılar
+## 📌 Notlar
 
-- Grafikler (N-gram, tema bazlı sayım, pasta grafik)
-- Örnek yorumlar ve sorun tipi etiketleri
-- Sunuma hazır PowerPoint dosyası (`oyun_yorum_analizi_final.pptx`)
-
----
-
-## 📌 Not
-
-Bu proje eğitim ve analiz amaçlıdır. Herhangi bir ticari amaç güdülmemektedir.
+- Python 3.10 ile test edilmiştir.
+- Gensim ve NumPy uyumsuzluklarına dikkat edin. Sorun yaşarsanız `pip install numpy==1.23.5` önerilir.
 
 ---
 
-## 🙏 Teşekkürler
+## 🧑‍💻 Katkıda Bulunun
 
-Katkılarınız ve geri bildirimleriniz için teşekkür ederim!
+Pull request'ler memnuniyetle karşılanır. Her türlü geri bildirim ve katkı için teşekkür ederiz.

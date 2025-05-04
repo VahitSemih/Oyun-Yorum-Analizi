@@ -5,8 +5,7 @@ Bu proje, oyunlara yapılan yorumların metin işleme (NLP) teknikleriyle analiz
 ## 🧠 Amaç
 
 Bu proje kapsamında:
-- Türkçe oyun yorumları **stemmed** ve **lemmatized** olarak ön işlenmiştir.
-- Yorumlar, **CBOW** ve **Skip-Gram** teknikleriyle Word2Vec vektörlerine dönüştürülmüştür.
+- İngilizce oyun yorumları **stemmed** ve **lemmatized** olarak ön işlenmiştir.
 - Farklı parametre kombinasyonları ile modeller eğitilmiştir.
 
 ---

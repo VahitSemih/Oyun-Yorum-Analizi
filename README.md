@@ -1,36 +1,34 @@
-# 🎮 Oyun Yorum Analizi
+# 🎮 Oyun Yorum Analizi — Word2Vec ile Vektörleştirme
 
-Bu proje, oyunlara ait kullanıcı yorumlarını doğal dil işleme (NLP) teknikleriyle analiz etmeyi amaçlamaktadır. Yorumlar ön işleme adımlarından geçirilmiş ve Word2Vec yöntemi ile vektörleştirilerek benzerlik analizi yapılmıştır.
+Bu proje, oyunlara yapılan yorumların metin işleme (NLP) teknikleriyle analiz edilmesini ve Word2Vec modelleriyle vektörleştirilmesini amaçlar.
 
----
+## 🧠 Amaç
 
-## 📌 Amaç
-
-Bu proje ile:
-
-- Oyunlar hakkında yapılan kullanıcı yorumları analiz edilebilir,
-- Metin verileri anlamlı kelime vektörlerine dönüştürülebilir,
-- Sentiment analysis veya tavsiye sistemlerinde kullanılabilecek hazır embedding modelleri elde edilebilir.
+Bu proje kapsamında:
+- Türkçe oyun yorumları **stemmed** ve **lemmatized** olarak ön işlenmiştir.
+- Yorumlar, **CBOW** ve **Skip-Gram** teknikleriyle Word2Vec vektörlerine dönüştürülmüştür.
+- Farklı parametre kombinasyonları ile modeller eğitilmiştir.
 
 ---
 
 ## 🗂️ Veri Seti
 
-Veri seti iki şekilde hazırlanmıştır:
+Veri seti iki farklı ön işlenmiş dosyadan oluşmaktadır:
+- `yorumlar_stemmed.csv`: Köklerine indirgenmiş (stemmed) yorumlar.
+- `yorumlar_lemmatized.csv`: Lemmatize edilmiş yorumlar.
 
-- **Stemmed**: Yorumlardaki kelimelerin köklerine indirgenmiş hali.
-- **Lemmatized**: Kelimelerin sözlük temelli kök hallerine indirgenmiş hali.
+Her iki dosyada da:
+- `yorum`: Orijinal yorum metni
+- `stemmed` veya `lemmatized`: Ön işlenmiş yorumlar
 
-Veri seti, kullanıcı yorumlarının daha verimli analiz edilebilmesi için ön işleme (preprocessing) aşamalarından geçirilmiştir. Bu veri seti, Türkçe metin işleme projelerinde kullanılabilir.
+Veri seti, metin sınıflandırma, duygu analizi veya öneri sistemlerinde ön işleme/vektörleştirme adımı olarak kullanılabilir.
 
 ---
 
-## 🛠️ Gerekli Kütüphaneler
+## ⚙️ Modelin Oluşturulması (Adım Adım)
 
-Projede kullanılan başlıca Python kütüphaneleri:
+### 1. Reponun Klonlanması
 
-```txt
-pandas
-gensim
-numpy
-scikit-learn
+```bash
+git clone https://github.com/VahitSemih/Oyun-Yorum-Analizi.git
+cd Oyun-Yorum-Analizi

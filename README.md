@@ -75,9 +75,3 @@ Kurulum:
 ```bash
 pip install -r requirements.txt
 ```
-## 🧰 Gerekli Kütüphaneler
-
-Aşağıdaki kütüphanelerin yüklü olması gerekir:
-
-```bash
-pip install gensim pandas numpy matplotlib

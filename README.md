@@ -32,3 +32,8 @@ Veri seti, metin sınıflandırma, duygu analizi veya öneri sistemlerinde ön i
 ```bash
 git clone https://github.com/VahitSemih/Oyun-Yorum-Analizi.git
 cd Oyun-Yorum-Analizi
+'''
+
+### 1. Reponun Klonlanması
+
+```bash

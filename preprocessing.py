@@ -1,28 +1,26 @@
 import pandas as pd
 import nltk
 import csv
+import os
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer, PorterStemmer
 
-# nltk verilerini bir kez indir
-try:
-    nltk.data.find("tokenizers/punkt")
-except LookupError:
-    nltk.download("punkt")
+# Bu satırlar eksik veya bozuk indirilmiş dosyaları temizler
+nltk.download('punkt', force=True)
+nltk.download('punkt_tab', force=True)
+nltk.download('stopwords', force=True)
+nltk.download('wordnet', force=True)
 
-try:
-    nltk.data.find("corpora/stopwords")
-except LookupError:
-    nltk.download("stopwords")
+# Dosya adını belirt
+csv_file = "cs2_yorumlar_ingilizce_5000.csv"
 
-try:
-    nltk.data.find("corpora/wordnet")
-except LookupError:
-    nltk.download("wordnet")
+# Dosya mevcut mu kontrol et
+if not os.path.exists(csv_file):
+    raise FileNotFoundError(f"Dosya bulunamadı: {csv_file}")
 
 # CSV'yi oku
-df = pd.read_csv("cs2_yorumlar_ingilizce_5000.csv")
+df = pd.read_csv(csv_file)
 
 # İngilizce stop word listesi
 stop_words = set(stopwords.words('english'))
@@ -31,8 +29,10 @@ stop_words = set(stopwords.words('english'))
 lemmatizer = WordNetLemmatizer()
 english_stemmer = PorterStemmer()
 
-# İşleme fonksiyonu
+# Cümle işleme fonksiyonu
 def preprocess_sentence(sentence):
+    if not isinstance(sentence, str) or sentence.strip() == "":
+        return [], []
     tokens = word_tokenize(sentence)
     filtered_tokens = [token.lower() for token in tokens if token.isalpha() and token.lower() not in stop_words]
     lemmatized_tokens = [lemmatizer.lemmatize(token) for token in filtered_tokens]
@@ -44,31 +44,34 @@ tokenized_corpus_lemmatized = []
 tokenized_corpus_stemmed = []
 
 for comment in df["yorum"]:
-    if isinstance(comment, str):  # Sadece string olanları işle
-        lemmatized, stemmed = preprocess_sentence(comment)
-        tokenized_corpus_lemmatized.append(lemmatized)
-        tokenized_corpus_stemmed.append(stemmed)
+    lemmatized, stemmed = preprocess_sentence(comment)
+    tokenized_corpus_lemmatized.append(lemmatized)
+    tokenized_corpus_stemmed.append(stemmed)
 
-# CSV'lere yaz
+# Lemmatize edilmiş cümleleri CSV'ye yaz
 with open("lemmatized_sentences.csv", mode="w", newline='', encoding="utf-8") as file:
     writer = csv.writer(file)
     for tokens in tokenized_corpus_lemmatized:
-        writer.writerow([' '.join(tokens)])
+        writer.writerow([' '.join(tokens)])  # Her cümle tek hücrede
 
+# Stem'lenmiş cümleleri CSV'ye yaz
 with open("stemmed_sentences.csv", mode="w", newline='', encoding="utf-8") as file:
     writer = csv.writer(file)
     for tokens in tokenized_corpus_stemmed:
         writer.writerow([' '.join(tokens)])
 
-# İlk 5 cümleyi yazdıralım
-for i in range(5):
+# İlk 5 cümleyi karşılaştırmalı olarak yazdır
+for i in range(min(5, len(df))):
     print(f"Cümle {i+1} - Base: {df['yorum'].iloc[i]}")
     print(f"Cümle {i+1} - Lemmatized: {tokenized_corpus_lemmatized[i]}")
     print(f"Cümle {i+1} - Stemmed: {tokenized_corpus_stemmed[i]}")
     print("\n")
 
-# İlk yorumu yaz
-text = df["yorum"].iloc[0]
-print("İlk yorum:", text)
-print("Temizlenmiş tokenlar:", word_tokenize(text.lower()))
-print("Stem uygulanmış tokenlar:", tokenized_corpus_stemmed[0])
+# İlk yorumu detaylı analiz et
+if len(df) > 0:
+    text = df["yorum"].iloc[0]
+    print("İlk yorum:", text)
+    print("Tokenize edilmiş:", word_tokenize(text.lower()))
+    lemmatized, stemmed = preprocess_sentence(text)
+    print("Stopword ve temizlik sonrası:", lemmatized)
+    print("Stem uygulanmış tokenlar:", stemmed)

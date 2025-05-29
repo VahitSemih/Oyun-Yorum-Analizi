@@ -76,4 +76,4 @@ pip install -r requirements.txt
 ## 👨‍💻 Proje Sahibi
 
 - Vahit Semih Meriç
-- Gümüşhane Üniversites / Doğal Dil İşleme
+- Gümüşhane Üniversitesi / Doğal Dil İşleme

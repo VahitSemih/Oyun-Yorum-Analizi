@@ -1,14 +1,6 @@
 # 🎮 Oyun Yorum Analizi — Word2Vec ile Vektörleştirme
 
-Bu proje, oyunlara yapılan yorumların metin işleme (NLP) teknikleriyle analiz edilmesini ve Word2Vec modelleriyle vektörleştirilmesini amaçlar.
-
-## 🧠 Amaç
-
-Bu proje kapsamında:
-- İngilizce oyun yorumları **stemmed** ve **lemmatized** olarak ön işlenmiştir.
-- Farklı parametre kombinasyonları ile modeller eğitilmiştir.
-
----
+Bu proje, Steam üzerindeki CS2 (Counter-Strike 2) oyununa ait İngilizce kullanıcı yorumlarının metin işleme (NLP) teknikleriyle analiz edilmesini ve Word2Vec modelleriyle vektörleştirilmesini, yorumlar arasındaki anlamsal benzerliği ölçmek ve farklı vektörleme modellerini karşılaştırmaktır.
 
 ## 🗂️ Veri Seti
 
@@ -75,3 +67,13 @@ Kurulum:
 ```bash
 pip install -r requirements.txt
 ```
+## 📌 Notlar
+
+- `lemmatized` ve `stemmed` veriler ayrı ayrı değerlendirilmiştir.
+- Word2Vec modelleri CBOW ve Skip-gram mimarileriyle, farklı pencere (`window`) ve vektör boyutlarında (`dim`) eğitilmiştir.
+- Giriş metni olarak bir oyun yorumu seçilmiş, bu metne en çok benzeyen yorumlar bulunmuştur.
+
+## 👨‍💻 Proje Sahibi
+
+- Vahit Semih Meriç
+- Gümüşhane Üniversites / Doğal Dil İşleme

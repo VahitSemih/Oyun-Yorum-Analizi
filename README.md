@@ -41,6 +41,22 @@ pip install -r requirements.txt
 ```bash
 python word2vec_vektorlestirme.py
 ```
+### 5. TF-IDF benzerlik analizi için:
+
+```bash
+python tfidf_benzerlik_lemmatized.py
+python tfidf_benzerlik_stemmed.py
+```
+### 6. Word2Vec benzerlik analizi için:
+```bash
+python word2vec_benzerlik_lemmatized.py
+python word2vec_benzerlik_stemmed.py
+```
+### 7. Jaccard benzerliklerini hesaplamak için:
+
+```bash
+python jaccard_benzerlik_hesapla.py
+```
 
 # 🧠 Veri Seti Hakkında
 - Bu veri seti, oyunlara yapılan kullanıcı yorumlarının analizini içerir. Kullanım amaçları:

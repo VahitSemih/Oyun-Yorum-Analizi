@@ -37,22 +37,44 @@ source venv/bin/activate       # macOS/Linux
 ```bash
 pip install -r requirements.txt
 ```
-### 4. Modeli Eğitme Script’ini Çalıştır
+
+### 4. Zipf Grafiğinin Oluşturulması
+```bash
+python zipf.py 
+```
+
+### 5. Ön İşleme Adımları
+```bash
+python preprocessing.py 
+```
+
+### 6. Veri Temizlememe ve Temizlenmiş Zipf Grafiğinin Oluşturulması
+```bash
+python veri_temizle_zipf.py 
+```
+
+### 7.TFIDF ile vektörleştirme
+```bash
+python tfidf_vektorleştirme.py 
+```
+
+### 8. Modeli Eğitme Script’ini Çalıştır
 ```bash
 python word2vec_vektorlestirme.py
 ```
-### 5. TF-IDF benzerlik analizi için:
 
+### 9. TF-IDF benzerlik analizi için:
 ```bash
 python tfidf_benzerlik_lemmatized.py
 python tfidf_benzerlik_stemmed.py
 ```
-### 6. Word2Vec benzerlik analizi için:
+
+### 10. Word2Vec benzerlik analizi için:
 ```bash
 python word2vec_benzerlik_lemmatized.py
 python word2vec_benzerlik_stemmed.py
 ```
-### 7. Jaccard benzerliklerini hesaplamak için:
+### 11. Jaccard benzerliklerini hesaplamak için:
 
 ```bash
 python jaccard_benzerlik_hesapla.py
